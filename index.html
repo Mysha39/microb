@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@1,300&display=swap" rel="stylesheet">
+    <meta charset="utf-8">
+    <style media="screen">
+        body{
+          background-color: #DEF9FF;
+        }
+        .que{
+          position: relative;
+          padding: 3px;
+          margin-bottom: 7px;
+          background-color: #91EECF;
+          right: 20%;
+          left: 20%;
+          width: 60%;
+          border: 2px solid #469379;
+          border-radius: 20px;
+        }
+        .ql{
+          color: #003D53;
+          margin: 5px;
+          padding: 5px;
+        }
+        .que input{
+          padding: 5px;
+          margin: 5px
+        }
+        h1{
+          position: relative;
+          color: #003244;
+          font-family: 'Open Sans Condensed', sans-serif;
+          font-size: 42px;
+          letter-spacing: 0.05px;
+          font-weight: 1000;
+          left: 30%;
+          width: 70%;
+        }
+
+    </style>
+    <title>Бактерицидная эффективность</title>
+    <script type="text/javascript">
+    function _form(){
+      if (document.fo.elements.h.value!=""){
+        let h = document.fo.elements.h.value;
+        let w = document.fo.elements.w.value;
+        let l = document.fo.elements.l.value;
+        let v = h*w*l;
+        let maxi;
+        if(h>w && h>l){
+          maxi = h/2;
+        }else if(w>h && w>l){
+          maxi = w/2;
+        }else{
+          maxi = l/2;
+        }
+        let p = document.fo.elements.type.value;
+        let t = document.fo.elements.t.value;
+        if(p == "disopen"){
+          v = v/document.fo.elements.vm.value/60*t;
+        }
+        let ef = 100;
+        let text = "Замечательный результат-комната абсолютно чистая. ";
+        if(p == "open"){
+          text += "";
+        }
+        alert(String(ef)+"%\n"+text);
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <h1>Калькулятор бактерцидной эффективности</h1>
+    <div class = "calc">
+      <form method="get" name="fo" action = "index.html" onsubmit="return _form ( );">
+        <div class = "que">
+          <label id = "h_l" class = "ql">Высота помещения(м) </label><p>
+          <input type = "number" placeholder="Высота помещения" min = "0" name = "h" class = "q qn" required>
+        </div>
+        <div class = "que">
+          <label id = "w_l" class = "ql">Ширина помещения(м) </label><p>
+          <input type = "number" min = "0" name = "w" class = "q qn" required>
+        </div>
+        <div class = "que">
+          <label id = "l_l" class = "ql">Длина помещения(м) </label><p>
+          <input type = "number" min = "0" name = "l" class = "q qn" required>
+        </div>
+        <div class = "que">
+          <label id = "type_l" class = "ql">Тип лампы </label><p>
+          <select name = "type" class="q qs">
+            <option class = "qv" value = "open"> Открытого типа(обычная УФ-лампа, кварцевая лампа)</option>
+            <option class = "qv" value = "disopen"> Закрытого типа(рециркулятор)</option>
+          </select> <p> <label id = "vm_l" class = "ql">производительность облучателя(для рециркулятора и уф-ламп закрытого типа, в м3/ч)</label>
+           <input type="number" name="vm" class = "q qn" min = "0" max = "100" value = "0" required>
+        </div>
+        <div class = "que">
+          <label id = "t_l" class = "ql">Время процедуры(минуты) </label><p>
+          <input type = "number" name = "t" class = "q qn" min = "0">
+        </div>
+        <input type="submit" class = "que" value = "Рассчитать!">
+      </form>
+    </div>
+  </body>
+</html>
