@@ -4,7 +4,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@1,300&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="/images/favicon.ico" type="imgonline-com-ua-Resize-7hifRnYHR4NukzU.ico">
+    <link rel="shortcut icon" href="imgonline-com-ua-Resize-7hifRnYHR4NukzU.ico">
     <meta charset="utf-8">
     <style media="screen">
         body{
@@ -62,6 +62,7 @@
     <title>Бактерицидная эффективность</title>
     <script type="text/javascript">
     function _form(){
+      try{
       if (document.fo.elements.h.value!=""){
         let h = document.fo.elements.h.value;
         let w = document.fo.elements.w.value;
@@ -80,8 +81,10 @@
         if(p == "disopen"){
           v = v/document.fo.elements.vm.value/60*t;
         }
-        let k = 0;
-        if(p == "open")
+        let k;
+        if(t<20){
+          k = 40
+        }else if(p == "open"){
           if(maxi<6){
             k = 96
           }else if(maxi<11){
@@ -92,7 +95,7 @@
             }else if(t<150){
               k = 91;
             }else{
-              k = 95
+              k = 95;
             }
           }else{
             if(t<50){
@@ -106,12 +109,12 @@
             }
           }
         }else{
-          k = t/(v/vm)*100;
+          k = Math.floor(t/(v/vm)*100);
           if(k>99){
             k = 97;
           }
         }
-        let ef = getRandomInt((100-k)/2)+k;
+        let ef = Math.floor(Math.random()*Math.floor((100-k)/2))+k;
         let text = "";
         if(ef>95){
           text = "Почти идеальная чистота!";
@@ -121,8 +124,10 @@
           text = "Cоветуем пересмотреть параметры облучения";
         }
         alert(String(ef)+"%\n"+text);
+      }}catch(e){
+        alert(e);
       }
-    }
+      }
     </script>
   </head>
   <body>
@@ -131,7 +136,7 @@
       <form method="get" name="fo" onsubmit="return _form ( );">
         <div class = "que">
           <input type = "number" placeholder="Высота помещения(м)" min = "0" max = "8" name = "h" class = "q qn" required>
-        </div>0
+        </div>
         <div class = "que">
           <input type = "number" min = "0" max = "50" name = "w" class = "q qn" placeholder="Ширина помещения(м)" required>
         </div>
