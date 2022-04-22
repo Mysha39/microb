@@ -3,7 +3,6 @@
   <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="shortcut icon" href="/images/EeD2B1eO7c4.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@1,300&display=swap" rel="stylesheet">
     <meta charset="utf-8">
     <style media="screen">
@@ -80,10 +79,45 @@
         if(p == "disopen"){
           v = v/document.fo.elements.vm.value/60*t;
         }
-        let ef = 100;
-        let text = "Замечательный результат-комната абсолютно чистая. ";
-        if(p == "open"){
-          text += "";
+        let k = 0;
+        if(p == "open")
+          if(maxi<6){
+            k = 96
+          }else if(maxi<11){
+            if(t<30){
+              k = 80;
+            }else if(t<100){
+              k = 86;
+            }else if(t<150){
+              k = 91;
+            }else{
+              k = 95
+            }
+          }else{
+            if(t<50){
+              k = 80;
+            }else if(t<120){
+              k = 84;
+            }else if(t<180){
+              k = 90;
+            }else{
+              k = 94;
+            }
+          }
+        }else{
+          k = t/(v/vm)*100;
+          if(k>99){
+            k = 97;
+          }
+        }
+        let ef = getRandomInt((100-k)/2)+k;
+        let text = "";
+        if(ef>95){
+          text = "Почти идеальная чистота!";
+        }else if(ef>90){
+          text = "Все хорошо, но можно и лучше.";
+        }else{
+          text = "Cоветуем пересмотреть параметры облучения";
         }
         alert(String(ef)+"%\n"+text);
       }
@@ -95,13 +129,13 @@
     <div class = "calc">
       <form method="get" name="fo" onsubmit="return _form ( );">
         <div class = "que">
-          <input type = "number" placeholder="Высота помещения(м)" min = "0" name = "h" class = "q qn" required>
+          <input type = "number" placeholder="Высота помещения(м)" min = "0" max = "8" name = "h" class = "q qn" required>
+        </div>0
+        <div class = "que">
+          <input type = "number" min = "0" max = "50" name = "w" class = "q qn" placeholder="Ширина помещения(м)" required>
         </div>
         <div class = "que">
-          <input type = "number" min = "0" name = "w" class = "q qn" placeholder="Ширина помещения(м)" required>
-        </div>
-        <div class = "que">
-          <input type = "number" min = "0" name = "l" class = "q qn" placeholder="Длина помещения(м)" required>
+          <input type = "number" min = "0" max = "50" name = "l" class = "q qn" placeholder="Длина помещения(м)" required>
         </div>
         <div class = "que">
           <label id = "type_l" class = "ql">Тип лампы </label><p>
@@ -109,15 +143,14 @@
             <option class = "qv" value = "open"> Открытого типа(обычная УФ-лампа, кварцевая лампа)</option>
             <option class = "qv" value = "disopen"> Закрытого типа(рециркулятор)</option>
           </select> <p> <label id = "vm_l" class = "ql">производительность облучателя(для рециркулятора и уф-ламп закрытого типа, в м3/ч)</label>
-           <input type="number" name="vm" class = "q qn" min = "0" max = "100" value = "0" required>
+           <input type="number" name="vm" class = "q qn" min = "0" max = "100" value = "70">
         </div>
         <div class = "que">
 
-          <input type = "number" name = "t" class = "q qn" placeholder="Время процедуры(минуты)" min = "0">
+          <input type = "number" name = "t" class = "q qn" placeholder="Время процедуры(минуты)" min = "0" max = "270">
         </div>
         <input type="submit" class = "que" value = "Рассчитать!">
       </form>
     </div>
   </body>
 </html>
-
